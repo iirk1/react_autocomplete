@@ -15,9 +15,9 @@ export const App: React.FC = () => {
   const born = checkedItem?.born;
   const died = checkedItem?.died;
 
-  const title = checkedItem
-    ? `${name} (${born} - ${died})`
-    : 'No selected person';
+  const [title, setTitle] = useState(
+    checkedItem ? `${name} (${born} - ${died})` : 'No selected person',
+  );
 
   const applyQuery = useCallback(debounce(setAppliedQuery, 300), []);
 
@@ -32,6 +32,7 @@ export const App: React.FC = () => {
   const handleChangeQuery = event => {
     setQuery(event.target.value);
     applyQuery(event.target.value);
+    setTitle('No selected person');
   };
 
   return (
@@ -65,6 +66,9 @@ export const App: React.FC = () => {
                       setCheckedItem(person);
                       setInputFocus(false);
                       setQuery(person.name);
+                      setTitle(
+                        `${person.name} (${person.born} - ${person.died})`,
+                      );
                     }}
                   >
                     <p className="has-text-link">{person.name}</p>
