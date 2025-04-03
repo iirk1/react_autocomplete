@@ -30,8 +30,8 @@ export const App: React.FC = () => {
   }, [appliedQuery]);
 
   const handleChangeQuery = event => {
-    setQuery(event.target.value);
-    applyQuery(event.target.value);
+    setQuery(event.target.value.trim());
+    applyQuery(event.target.value.trim());
     setTitle('No selected person');
   };
 
